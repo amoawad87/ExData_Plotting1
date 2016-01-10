@@ -1,0 +1,10 @@
+ENERGY <- read.table("./exdata-data-household_power_consumption/household_power_consumption.txt", header=T, sep=";")
+ENERGY$Date <- as.Date(ENERGY$Date, format="%y/%m/%d")
+dt <- ENERGY[(ENERGY$Date=="2007-02-01") | (ENERGY$Date=="2007-02-02"),]
+dt <- transform(dt, timestamp=as.POSIXct(paste(Date, Time)), "%d/%m/%Y %H:%M:%S")
+dt$Global_active_power <- as.numeric(dt$Global_active_power)
+dt$Global_reactive_power <- as.numeric(dt$Global_reactive_power)
+dt$Voltage <- as.numeric(dt$Voltage)
+dt$Sub_metering_1 <- as.numeric(dt$Sub_metering_1)
+dt$Sub_metering_2 <- as.numeric(dt$Sub_metering_2)
+dt$Sub_metering_3 <- as.numeric(dt$Sub_metering_3)
